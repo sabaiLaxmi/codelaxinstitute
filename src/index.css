@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #0F1129;
+  --color-navy-2: #181B3A;
+  --color-indigo: #4338CA;
+  --color-indigo-light: #6D5CE0;
+  --color-orange: #F97316;
+  --color-ink: #14162B;
+  --color-ink-soft: #4A4D6B;
+  --color-bg: #FAFAF8;
+  --color-bg-alt: #F1EFFB;
+  --color-border: #E4E1F5;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Aliasing old variables so the existing site doesn't break, though we'll update them later */
+  --color-primary: var(--color-indigo);
+  --color-primary-hover: var(--color-indigo-light);
+  --color-secondary: var(--color-navy);
+  --color-accent: var(--color-orange);
+  --color-background: var(--color-bg);
+  --color-surface: #ffffff;
+  --color-text-main: var(--color-ink);
+  --color-text-muted: var(--color-ink-soft);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--color-border);
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+}
+
+@layer base {
+  /* Global keyboard focus states */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid var(--color-indigo);
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+
+  /* Global prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-delay: -1ms !important;
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      background-attachment: initial !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+    }
+  }
+}
