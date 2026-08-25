@@ -16,6 +16,13 @@ const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState({});
   const [showResult, setShowResult] = useState(false);
   const [showOverview, setShowOverview] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Filtered questions based on category
   const filteredQuestions = selectedCategory 
@@ -156,7 +163,7 @@ const Quiz = () => {
           >
             {categories.map((cat, index) => {
               const angle = (index / categories.length) * Math.PI * 2;
-              const radius = 35; 
+              const radius = windowWidth < 768 ? 26 : 35; 
               
               return (
                 <div 

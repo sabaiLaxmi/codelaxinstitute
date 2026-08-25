@@ -218,12 +218,12 @@ const Home = () => {
       <section className="py-24 bg-bg relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-              <div>
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 text-center md:text-left">
+              <div className="mb-4 md:mb-0">
                 <p className="font-mono text-orange text-sm uppercase tracking-wider mb-2">01. Curriculum</p>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-navy mb-4">Featured Tracks</h2>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-navy">Featured Tracks</h2>
               </div>
-              <Link to="/courses" className="flex items-center text-indigo font-semibold hover:text-indigo-light transition-colors mt-4 md:mt-0">
+              <Link to="/courses" className="flex items-center justify-center text-indigo font-semibold hover:text-indigo-light transition-colors mt-2 md:mt-0">
                 View All Courses <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
