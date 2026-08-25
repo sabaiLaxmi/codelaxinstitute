@@ -172,12 +172,12 @@ const Quiz = () => {
                       onClick={() => setSelectedCategory(cat.id)}
                       whileHover={{ scale: 1.15, zIndex: 50 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`w-40 h-40 md:w-48 md:h-48 rounded-[24px] bg-white shadow-xl cursor-pointer border-2 ${cat.border} flex flex-col items-center justify-center gap-4 transition-shadow hover:shadow-2xl hover:shadow-${cat.border.split('-')[1]}/30 group`}
+                      className={`w-28 h-28 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-[20px] md:rounded-[24px] bg-white shadow-xl cursor-pointer border-2 ${cat.border} flex flex-col items-center justify-center gap-2 md:gap-4 transition-shadow hover:shadow-2xl hover:shadow-${cat.border.split('-')[1]}/30 group`}
                     >
-                      <div className={`w-16 h-16 rounded-full ${cat.bg} flex items-center justify-center ${cat.color} font-mono text-2xl font-bold transition-transform group-hover:scale-110`}>
+                      <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full ${cat.bg} flex items-center justify-center ${cat.color} font-mono text-lg md:text-2xl font-bold transition-transform group-hover:scale-110`}>
                         {cat.icon}
                       </div>
-                      <span className="font-display font-bold text-navy text-lg text-center px-2">
+                      <span className="font-display font-bold text-navy text-xs sm:text-sm md:text-lg text-center px-2">
                         {cat.title}
                       </span>
                     </motion.div>
