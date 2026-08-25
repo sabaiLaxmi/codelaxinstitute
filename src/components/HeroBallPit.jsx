@@ -6,12 +6,7 @@ const HeroBallPit = () => {
   const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(() => {
-    // Check for reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      setShouldRender(false);
-      return;
-    }
+
 
     if (!containerRef.current) return;
 
