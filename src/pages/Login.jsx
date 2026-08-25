@@ -1,14 +1,30 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle, Code } from 'lucide-react';
+import { ArrowRight, CheckCircle, Code, Eye, EyeOff } from 'lucide-react';
 
 const Login = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+
+    const existingUsers = JSON.parse(localStorage.getItem('codepath_users')) || [];
+    const user = existingUsers.find(u => u.email === email && u.password === password);
+
+    if (user) {
+      localStorage.setItem('codepath_loggedIn', 'true');
+      window.dispatchEvent(new Event('authChange'));
+      setIsSubmitted(true);
+      setTimeout(() => navigate('/'), 1500);
+    } else {
+      setError("Invalid email or password. Please create an account first.");
+    }
   };
 
   return (
@@ -42,6 +58,8 @@ const Login = () => {
                   <p className="text-ink-soft text-sm">Sign in to access your learning dashboard.</p>
                 </div>
 
+                {error && <div className="mb-6 p-3 bg-red-100 text-red-700 text-sm rounded-lg text-center font-medium border border-red-200">{error}</div>}
+
                 <form className="space-y-5" onSubmit={handleSubmit}>
                   <div>
                     <label htmlFor="email" className="font-mono block text-xs uppercase text-ink-soft font-semibold mb-2">Email Address</label>
@@ -53,7 +71,16 @@ const Login = () => {
                       <label htmlFor="password" className="font-mono block text-xs uppercase text-ink-soft font-semibold">Password</label>
                       <a href="#" className="text-sm text-indigo hover:text-indigo-light font-medium transition-colors">Forgot password?</a>
                     </div>
-                    <input type="password" id="password" required className="w-full bg-bg-alt text-ink px-4 py-3 rounded-xl border border-border focus:ring-2 focus:ring-indigo focus:border-transparent transition-all outline-none" placeholder="••••••••" />
+                    <div className="relative">
+                      <input type={showPassword ? "text" : "password"} id="password" required className="w-full bg-bg-alt text-ink px-4 py-3 rounded-xl border border-border focus:ring-2 focus:ring-indigo focus:border-transparent transition-all outline-none pr-10" placeholder="••••••••" />
+                      <button 
+                        type="button" 
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-soft hover:text-indigo transition-colors"
+                      >
+                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                      </button>
+                    </div>
                   </div>
 
                   <button type="submit" className="w-full bg-indigo hover:bg-indigo-light text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_4px_14px_rgba(67,56,202,0.39)] hover:shadow-[0_6px_20px_rgba(67,56,202,0.23)] hover:-translate-y-0.5 mt-4 flex justify-center items-center gap-2">

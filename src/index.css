@@ -53,30 +53,60 @@ body {
   }
 }
 
-@layer base {
-  /* Global keyboard focus states */
-  a:focus-visible,
-  button:focus-visible,
-  input:focus-visible,
-  textarea:focus-visible,
-  select:focus-visible {
-    outline: 2px solid var(--color-indigo);
-    outline-offset: 2px;
-    box-shadow: none;
-  }
+/* Global keyboard focus states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-indigo);
+  outline-offset: 2px;
+  box-shadow: none;
+}
 
-  /* Global prefers-reduced-motion */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    ::before,
-    ::after {
-      animation-delay: -1ms !important;
-      animation-duration: 1ms !important;
-      animation-iteration-count: 1 !important;
-      background-attachment: initial !important;
-      scroll-behavior: auto !important;
-      transition-duration: 0s !important;
-      transition-delay: 0s !important;
-    }
+/* Global prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
+}
+
+/* Dark mode overrides (Forced) */
+html.dark body {
+  background-color: var(--color-navy) !important;
+  color: var(--color-bg) !important;
+}
+html.dark .bg-bg {
+  background-color: var(--color-navy) !important;
+}
+html.dark .bg-white {
+  background-color: var(--color-navy-2) !important;
+  border-color: #334155 !important;
+  color: var(--color-bg) !important;
+}
+html.dark .text-navy {
+  color: var(--color-bg) !important;
+}
+html.dark .text-ink {
+  color: var(--color-bg) !important;
+}
+html.dark .text-ink-soft {
+  color: #94a3b8 !important;
+}
+html.dark .bg-bg-alt {
+  background-color: #090A1A !important;
+}
+html.dark .border-border {
+  border-color: #334155 !important;
+}
+html.dark .shadow-2xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
 }

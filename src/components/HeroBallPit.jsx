@@ -144,7 +144,7 @@ const HeroBallPit = () => {
 
     // Animation Loop
     let animationFrameId;
-    const gravity = new THREE.Vector3(0, -0.05, 0);
+    const gravity = new THREE.Vector3(0, -0.005, 0); // Much lower gravity for a floaty effect
     const damping = 0.99;
     const bounceFactor = 0.7;
 
@@ -171,14 +171,15 @@ const HeroBallPit = () => {
         // Apply gravity
         s.velocity.add(gravity);
         
-        // Apply mouse attraction if hovering
+        // Apply mouse interaction if hovering
         if (isHovering) {
           const dirToMouse = new THREE.Vector3().subVectors(mouseWorldPos, s.mesh.position);
           const dist = dirToMouse.length();
           if (dist < 50) {
             dirToMouse.normalize();
-            // Gentle drift
-            s.velocity.add(dirToMouse.multiplyScalar(0.02 * (50 - dist) / 50));
+            // Push away (repel) and push heavily DOWN so they "fall" when hovered
+            s.velocity.add(dirToMouse.multiplyScalar(-0.1 * (50 - dist) / 50));
+            s.velocity.y -= 0.3 * (50 - dist) / 50;
           }
         }
 

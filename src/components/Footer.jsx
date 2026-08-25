@@ -1,7 +1,20 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SocialIcons from './SocialIcons';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setEmail('');
+      setTimeout(() => setSubscribed(false), 3000);
+    }
+  };
+
   return (
     <footer className="bg-navy border-t border-gray-800 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,10 +33,10 @@ const Footer = () => {
           <div>
             <h3 className="font-mono text-xs font-semibold text-gray-400 tracking-widest uppercase mb-4">Programs</h3>
             <ul className="space-y-3">
-              <li><Link to="/courses" className="text-sm text-gray-400 hover:text-white transition-colors">Full-Stack Development</Link></li>
-              <li><Link to="/courses" className="text-sm text-gray-400 hover:text-white transition-colors">Data Science</Link></li>
-              <li><Link to="/courses" className="text-sm text-gray-400 hover:text-white transition-colors">UI/UX Design</Link></li>
-              <li><Link to="/courses" className="text-sm text-gray-400 hover:text-white transition-colors">Cybersecurity</Link></li>
+              <li><Link to="/courses/frontend" className="text-sm text-gray-400 hover:text-white transition-colors">Full-Stack Development</Link></li>
+              <li><Link to="/courses/data" className="text-sm text-gray-400 hover:text-white transition-colors">Data Science</Link></li>
+              <li><Link to="/courses/uiux" className="text-sm text-gray-400 hover:text-white transition-colors">UI/UX Design</Link></li>
+              <li><Link to="/courses/cyber" className="text-sm text-gray-400 hover:text-white transition-colors">Cybersecurity</Link></li>
             </ul>
           </div>
 
@@ -31,8 +44,7 @@ const Footer = () => {
             <h3 className="font-mono text-xs font-semibold text-gray-400 tracking-widest uppercase mb-4">Company</h3>
             <ul className="space-y-3">
               <li><Link to="/about" className="text-sm text-gray-400 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="#" className="text-sm text-gray-400 hover:text-white transition-colors">Careers</Link></li>
-              <li><Link to="#" className="text-sm text-gray-400 hover:text-white transition-colors">Blog</Link></li>
+              <li><Link to="/careers" className="text-sm text-gray-400 hover:text-white transition-colors">Careers</Link></li>
               <li><Link to="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
@@ -40,18 +52,26 @@ const Footer = () => {
           <div>
             <h3 className="font-mono text-xs font-semibold text-gray-400 tracking-widest uppercase mb-4">Newsletter</h3>
             <p className="text-sm text-gray-400 mb-4">Get the latest news and articles to your inbox every month.</p>
-            <form className="flex" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full min-w-0 px-4 py-2 text-sm text-white placeholder-gray-500 bg-[#0A0C1B] border border-gray-700 rounded-l-md focus:outline-none focus:ring-1 focus:ring-indigo focus:border-indigo"
-              />
-              <button
-                type="submit"
-                className="flex-shrink-0 px-4 py-2 text-sm font-medium text-white bg-indigo border border-transparent rounded-r-md hover:bg-indigo-light focus:outline-none transition-colors"
-              >
-                Subscribe
-              </button>
+            <form className="flex flex-col gap-2" onSubmit={handleSubscribe}>
+              <div className="flex">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  className="w-full min-w-0 px-4 py-2 text-sm text-white placeholder-gray-500 bg-[#0A0C1B] border border-gray-700 rounded-l-md focus:outline-none focus:ring-1 focus:ring-indigo focus:border-indigo"
+                />
+                <button
+                  type="submit"
+                  className="flex-shrink-0 px-4 py-2 text-sm font-medium text-white bg-indigo border border-transparent rounded-r-md hover:bg-indigo-light focus:outline-none transition-colors"
+                >
+                  Subscribe
+                </button>
+              </div>
+              {subscribed && (
+                <span className="text-green-500 text-sm font-medium">Successfully subscribed!</span>
+              )}
             </form>
           </div>
         </div>
@@ -59,8 +79,8 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} CodePath Institute. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Privacy Policy</Link>
-            <Link to="#" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Terms of Service</Link>
+            <Link to="/privacy" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

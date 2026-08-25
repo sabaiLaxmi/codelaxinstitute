@@ -1,11 +1,28 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Logo from './Logo';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const location = useLocation();
+
+  useEffect(() => {
+    const checkAuth = () => {
+      setIsLoggedIn(localStorage.getItem('codepath_loggedIn') === 'true');
+    };
+    checkAuth();
+    window.addEventListener('authChange', checkAuth);
+    return () => window.removeEventListener('authChange', checkAuth);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('codepath_loggedIn');
+    window.dispatchEvent(new Event('authChange'));
+  };
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -28,8 +45,8 @@ const Navbar = () => {
           
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-1">
-              <span className="font-display font-bold text-2xl tracking-tight text-white">Code<span className="text-orange">Path</span></span>
+            <Link to="/" className="flex items-center">
+              <Logo />
             </Link>
           </div>
           
@@ -38,18 +55,30 @@ const Navbar = () => {
             <Link to="/" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">Home</Link>
             <Link to="/about" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">About</Link>
             <Link to="/courses" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">Courses</Link>
+            <Link to="/quiz" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">Quiz</Link>
             <Link to="/contact" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">Contact</Link>
           </div>
 
           {/* Desktop Actions */}
           <div className="hidden lg:flex items-center space-x-6">
             <div className="flex items-center space-x-4">
-              <Link to="/login" className="text-gray-300 hover:text-white font-medium text-sm border border-gray-600 hover:border-gray-400 px-5 py-2 rounded-full transition-all">
-                Login
-              </Link>
-              <Link to="/signup" className="bg-indigo hover:bg-indigo-light text-white px-6 py-2 rounded-full font-medium text-sm transition-all shadow-[0_0_15px_rgba(67,56,202,0.4)]">
-                Sign Up
-              </Link>
+              {isLoggedIn ? (
+                <button 
+                  onClick={handleLogout} 
+                  className="bg-orange hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium text-sm transition-all shadow-[0_0_15px_rgba(239,68,68,0.4)]"
+                >
+                  Logout
+                </button>
+              ) : (
+                <>
+                  <Link to="/login" className="text-gray-300 hover:text-white font-medium text-sm border border-gray-600 hover:border-gray-400 px-5 py-2 rounded-full transition-all">
+                    Login
+                  </Link>
+                  <Link to="/signup" className="bg-indigo hover:bg-indigo-light text-white px-6 py-2 rounded-full font-medium text-sm transition-all shadow-[0_0_15px_rgba(67,56,202,0.4)]">
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </div>
           </div>
 
@@ -73,11 +102,18 @@ const Navbar = () => {
               <Link to="/" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">Home</Link>
               <Link to="/about" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">About</Link>
               <Link to="/courses" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">Courses</Link>
+              <Link to="/quiz" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">Quiz</Link>
               <Link to="/contact" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">Contact</Link>
             </div>
             <div className="pt-4 border-t border-gray-800 flex flex-col space-y-3">
-              <Link to="/login" className="block w-full text-center px-4 py-3 border border-gray-600 text-white font-medium rounded-xl hover:bg-gray-800">Login</Link>
-              <Link to="/signup" className="block w-full text-center px-4 py-3 bg-indigo text-white font-medium rounded-xl shadow-lg">Sign Up</Link>
+              {isLoggedIn ? (
+                <button onClick={handleLogout} className="block w-full text-center px-4 py-3 bg-orange hover:bg-orange-600 text-white font-medium rounded-xl shadow-lg transition-colors">Logout</button>
+              ) : (
+                <>
+                  <Link to="/login" className="block w-full text-center px-4 py-3 border border-gray-600 text-white font-medium rounded-xl hover:bg-gray-800 transition-colors">Login</Link>
+                  <Link to="/signup" className="block w-full text-center px-4 py-3 bg-indigo text-white font-medium rounded-xl shadow-lg transition-colors">Sign Up</Link>
+                </>
+              )}
             </div>
           </div>
         </div>

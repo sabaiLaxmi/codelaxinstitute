@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Monitor, Server, Palette, Megaphone, Database, Cpu, Shield, Cloud, Clock, BarChart, Calendar, CheckCircle, ArrowRight } from 'lucide-react';
 
 // Reusable reveal wrapper
@@ -155,9 +154,10 @@ const tracks = [
 ];
 
 const Courses = () => {
-  const [activeTab, setActiveTab] = useState(null);
+  const { courseId } = useParams();
+  const navigate = useNavigate();
 
-  const activeTrack = activeTab ? tracks.find(t => t.id === activeTab) : null;
+  const activeTrack = courseId ? tracks.find(t => t.id === courseId) : null;
 
   return (
     <div className="bg-bg min-h-screen pt-24 pb-20">
@@ -188,7 +188,7 @@ const Courses = () => {
                 {tracks.map((track) => (
                   <div
                     key={track.id}
-                    onClick={() => setActiveTab(track.id)}
+                    onClick={() => navigate(`/courses/${track.id}`)}
                     className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-indigo/20 transition-all duration-300 cursor-pointer bg-white group hover:-translate-y-2 flex flex-col"
                   >
                     <div className="h-56 relative overflow-hidden">
@@ -224,7 +224,7 @@ const Courses = () => {
               >
                 <div className="p-4 bg-bg-alt flex items-center justify-between border-b border-border">
                   <button 
-                    onClick={() => setActiveTab(null)}
+                    onClick={() => navigate("/courses")}
                     className="flex items-center gap-2 text-indigo font-bold hover:text-indigo-light transition-colors px-4 py-2 rounded-lg hover:bg-indigo/5 text-sm md:text-base"
                   >
                     <ArrowRight className="w-4 h-4 rotate-180" /> Back to Courses

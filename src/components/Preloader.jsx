@@ -6,20 +6,17 @@ const Preloader = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Check if preloader has already run in this session
-    const hasRun = sessionStorage.getItem('preloaderRun');
-    
-    if (hasRun) {
-      setIsVisible(false);
-      return;
-    }
+    // Disabled session check so the beautiful loader shows every time the page refreshes!
+    // const hasRun = sessionStorage.getItem('preloaderRun');
+    // if (hasRun) {
+    //   setIsVisible(false);
+    //   return;
+    // }
+    // sessionStorage.setItem('preloaderRun', 'true');
 
-    // Mark as run
-    sessionStorage.setItem('preloaderRun', 'true');
-
-    // Simulate loading progress
-    const duration = 2000; // 2 seconds total loading time
-    const intervalTime = 20;
+    // Simulate loading progress (slower to clearly show percentage)
+    const duration = 3500; // 3.5 seconds total loading time
+    const intervalTime = 30;
     const steps = duration / intervalTime;
     let currentStep = 0;
 

@@ -1,13 +1,34 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, CheckCircle, Code } from 'lucide-react';
+import { ArrowRight, CheckCircle, Code, Eye, EyeOff } from 'lucide-react';
 
 const Signup = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const name = e.target.elements.name.value;
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+    const confirmPassword = e.target.elements.confirmPassword.value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    const existingUsers = JSON.parse(localStorage.getItem('codepath_users')) || [];
+    if (existingUsers.find(u => u.email === email)) {
+      alert("User with this email already exists!");
+      return;
+    }
+
+    const newUser = { name, email, password };
+    localStorage.setItem('codepath_users', JSON.stringify([...existingUsers, newUser]));
     setIsSubmitted(true);
   };
 
@@ -53,11 +74,29 @@ const Signup = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="password" className="font-mono block text-xs uppercase text-ink-soft font-semibold mb-2">Password</label>
-                      <input type="password" id="password" required className="w-full bg-bg-alt text-ink px-4 py-3 rounded-xl border border-border focus:ring-2 focus:ring-indigo focus:border-transparent transition-all outline-none" placeholder="••••••••" />
+                      <div className="relative">
+                        <input type={showPassword ? "text" : "password"} id="password" required className="w-full bg-bg-alt text-ink px-4 py-3 rounded-xl border border-border focus:ring-2 focus:ring-indigo focus:border-transparent transition-all outline-none pr-10" placeholder="••••••••" />
+                        <button 
+                          type="button" 
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-soft hover:text-indigo transition-colors"
+                        >
+                          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        </button>
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="confirmPassword" className="font-mono block text-xs uppercase text-ink-soft font-semibold mb-2">Confirm</label>
-                      <input type="password" id="confirmPassword" required className="w-full bg-bg-alt text-ink px-4 py-3 rounded-xl border border-border focus:ring-2 focus:ring-indigo focus:border-transparent transition-all outline-none" placeholder="••••••••" />
+                      <div className="relative">
+                        <input type={showConfirmPassword ? "text" : "password"} id="confirmPassword" required className="w-full bg-bg-alt text-ink px-4 py-3 rounded-xl border border-border focus:ring-2 focus:ring-indigo focus:border-transparent transition-all outline-none pr-10" placeholder="••••••••" />
+                        <button 
+                          type="button" 
+                          onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-soft hover:text-indigo transition-colors"
+                        >
+                          {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -108,10 +147,10 @@ const Signup = () => {
                   Connect this to a real auth provider later. Welcome to CodePath!
                 </p>
                 <button 
-                  onClick={() => setIsSubmitted(false)}
+                  onClick={() => navigate('/login')}
                   className="px-6 py-2 border-2 border-border text-navy font-semibold rounded-xl hover:bg-bg-alt transition-colors text-sm"
                 >
-                  Create Another
+                  Go to Login
                 </button>
               </motion.div>
             )}
