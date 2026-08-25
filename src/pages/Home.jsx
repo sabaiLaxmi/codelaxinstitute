@@ -122,7 +122,7 @@ const Home = () => {
             {/* Left: Text & CTAs */}
             <div className="max-w-xl">
               <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-                <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
+                <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
                   Launch Your Tech <span className="text-indigo-light">Career.</span>
                 </h1>
                 <p className="text-xl text-gray-300 mb-10 leading-relaxed">
@@ -139,17 +139,17 @@ const Home = () => {
                 </div>
 
                 {/* Hero Stats */}
-                <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-800">
+                <div className="grid grid-cols-3 gap-4 md:gap-6 pt-8 border-t border-gray-800">
                   <div>
-                    <p className="font-display text-3xl font-bold text-white"><AnimatedCounter value={5000} suffix="+" duration={2.5} /></p>
+                    <p className="font-display text-2xl md:text-3xl font-bold text-white"><AnimatedCounter value={5000} suffix="+" duration={2.5} /></p>
                     <p className="font-mono text-xs text-gray-400 mt-1 uppercase">Students Trained</p>
                   </div>
                   <div>
-                    <p className="font-display text-3xl font-bold text-white"><AnimatedCounter value={94} suffix="%" duration={2} /></p>
+                    <p className="font-display text-2xl md:text-3xl font-bold text-white"><AnimatedCounter value={94} suffix="%" duration={2} /></p>
                     <p className="font-mono text-xs text-gray-400 mt-1 uppercase">Placement Rate</p>
                   </div>
                   <div>
-                    <p className="font-display text-3xl font-bold text-white"><AnimatedCounter value={250} suffix="+" duration={2.2} /></p>
+                    <p className="font-display text-2xl md:text-3xl font-bold text-white"><AnimatedCounter value={250} suffix="+" duration={2.2} /></p>
                     <p className="font-mono text-xs text-gray-400 mt-1 uppercase">Hiring Partners</p>
                   </div>
                 </div>
@@ -192,21 +192,21 @@ const Home = () => {
       <section className="py-12 bg-white border-b border-border z-10 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-border">
-              <div>
-                <p className="font-display text-4xl font-bold text-navy mb-2"><AnimatedCounter value={8} /></p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center md:divide-x divide-border">
+              <div className="pb-4 md:pb-0">
+                <p className="font-display text-3xl md:text-4xl font-bold text-navy mb-2"><AnimatedCounter value={8} /></p>
                 <p className="font-mono text-sm text-ink-soft uppercase tracking-wide">Career Tracks</p>
               </div>
-              <div>
-                <p className="font-display text-4xl font-bold text-navy mb-2"><AnimatedCounter value={1200} suffix="+" /></p>
+              <div className="pb-4 md:pb-0">
+                <p className="font-display text-3xl md:text-4xl font-bold text-navy mb-2"><AnimatedCounter value={1200} suffix="+" /></p>
                 <p className="font-mono text-sm text-ink-soft uppercase tracking-wide">Project Hours</p>
               </div>
-              <div>
-                <p className="font-display text-4xl font-bold text-navy mb-2"><AnimatedCounter value={45} suffix="+" /></p>
+              <div className="pt-4 md:pt-0 border-t md:border-t-0 border-border">
+                <p className="font-display text-3xl md:text-4xl font-bold text-navy mb-2"><AnimatedCounter value={45} suffix="+" /></p>
                 <p className="font-mono text-sm text-ink-soft uppercase tracking-wide">Industry Mentors</p>
               </div>
-              <div>
-                <p className="font-display text-4xl font-bold text-navy mb-2"><AnimatedCounter value={98} suffix="%" /></p>
+              <div className="pt-4 md:pt-0 border-t md:border-t-0 border-border">
+                <p className="font-display text-3xl md:text-4xl font-bold text-navy mb-2"><AnimatedCounter value={98} suffix="%" /></p>
                 <p className="font-mono text-sm text-ink-soft uppercase tracking-wide">Satisfaction</p>
               </div>
             </div>
@@ -221,7 +221,7 @@ const Home = () => {
             <div className="flex flex-col md:flex-row justify-between items-end mb-12">
               <div>
                 <p className="font-mono text-orange text-sm uppercase tracking-wider mb-2">01. Curriculum</p>
-                <h2 className="font-display text-4xl font-bold text-navy mb-4">Featured Tracks</h2>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-navy mb-4">Featured Tracks</h2>
               </div>
               <Link to="/courses" className="flex items-center text-indigo font-semibold hover:text-indigo-light transition-colors mt-4 md:mt-0">
                 View All Courses <ArrowRight className="w-4 h-4 ml-1" />
@@ -261,7 +261,7 @@ const Home = () => {
           <Reveal>
             <div className="text-center mb-16">
               <p className="font-mono text-orange text-sm uppercase tracking-wider mb-2">02. Advantage</p>
-              <h2 className="font-display text-4xl font-bold text-navy mb-4">The CodePath Edge</h2>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-navy mb-4">The CodePath Edge</h2>
             </div>
           </Reveal>
           
@@ -292,7 +292,7 @@ const Home = () => {
           <Reveal>
             <div className="text-center mb-16">
               <p className="font-mono text-orange text-sm uppercase tracking-wider mb-2">03. Alumni</p>
-              <h2 className="font-display text-4xl font-bold text-navy">Don't Just Take Our Word For It</h2>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-navy">Don't Just Take Our Word For It</h2>
             </div>
             <TestimonialSlider testimonials={testimonials} />
           </Reveal>

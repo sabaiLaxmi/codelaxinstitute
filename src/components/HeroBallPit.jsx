@@ -124,23 +124,34 @@ const HeroBallPit = () => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
       
-      // Check if mouse is over the hero section
+      // Handle both mouse and touch events
+      const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+      const clientY = event.touches ? event.touches[0].clientY : event.clientY;
+
+      // Check if interaction is over the hero section
       if (
-        event.clientX >= rect.left &&
-        event.clientX <= rect.right &&
-        event.clientY >= rect.top &&
-        event.clientY <= rect.bottom
+        clientX >= rect.left &&
+        clientX <= rect.right &&
+        clientY >= rect.top &&
+        clientY <= rect.bottom
       ) {
         isHovering = true;
         // Normalize mouse to -1 to 1
-        targetMouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-        targetMouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        targetMouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        targetMouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
       } else {
         isHovering = false;
       }
     };
 
+    const onTouchEnd = () => {
+      isHovering = false;
+    };
+
     window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('touchmove', onMouseMove, { passive: true });
+    window.addEventListener('touchstart', onMouseMove, { passive: true });
+    window.addEventListener('touchend', onTouchEnd);
 
     // Animation Loop
     let animationFrameId;
@@ -295,6 +306,9 @@ const HeroBallPit = () => {
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('touchmove', onMouseMove);
+      window.removeEventListener('touchstart', onMouseMove);
+      window.removeEventListener('touchend', onTouchEnd);
       window.removeEventListener('resize', handleResize);
       observer.disconnect();
       

@@ -25,7 +25,18 @@ const TestimonialSlider = ({ testimonials }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.4 }}
-            className="flex flex-col items-center text-center"
+            className="flex flex-col items-center text-center cursor-grab active:cursor-grabbing"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.2}
+            onDragEnd={(e, { offset }) => {
+              const swipe = offset.x;
+              if (swipe < -50) {
+                setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+              } else if (swipe > 50) {
+                setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+              }
+            }}
           >
             <div className="flex text-orange mb-6">
               {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}

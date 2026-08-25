@@ -24,6 +24,24 @@ const Navbar = () => {
     window.dispatchEvent(new Event('authChange'));
   };
 
+  const getDesktopLinkClass = (path) => {
+    const isActive = location.pathname === path;
+    return `font-medium text-sm tracking-wide transition-colors ${
+      isActive 
+        ? 'text-white border-b-2 border-white pb-1' 
+        : 'text-gray-300 hover:text-white pb-1 border-b-2 border-transparent hover:border-gray-500'
+    }`;
+  };
+
+  const getMobileLinkClass = (path) => {
+    const isActive = location.pathname === path;
+    return `block px-3 py-3 text-base font-medium rounded-lg transition-colors ${
+      isActive 
+        ? 'text-white bg-gray-800 border-l-4 border-white pl-2' 
+        : 'text-gray-300 hover:bg-gray-800 hover:text-white'
+    }`;
+  };
+
   // Close mobile menu on route change
   useEffect(() => {
     setIsOpen(false);
@@ -52,11 +70,11 @@ const Navbar = () => {
           
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center space-x-8">
-            <Link to="/" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">Home</Link>
-            <Link to="/about" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">About</Link>
-            <Link to="/courses" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">Courses</Link>
-            <Link to="/quiz" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">Quiz</Link>
-            <Link to="/contact" className="text-gray-300 hover:text-white transition-colors font-medium text-sm tracking-wide">Contact</Link>
+            <Link to="/" className={getDesktopLinkClass('/')}>Home</Link>
+            <Link to="/about" className={getDesktopLinkClass('/about')}>About</Link>
+            <Link to="/courses" className={getDesktopLinkClass('/courses')}>Courses</Link>
+            <Link to="/quiz" className={getDesktopLinkClass('/quiz')}>Quiz</Link>
+            <Link to="/contact" className={getDesktopLinkClass('/contact')}>Contact</Link>
           </div>
 
           {/* Desktop Actions */}
@@ -99,11 +117,11 @@ const Navbar = () => {
         <div className="lg:hidden absolute top-full left-0 w-full bg-navy-2 border-t border-gray-800 shadow-2xl">
           <div className="px-4 pt-4 pb-6 space-y-4 flex flex-col">
             <div className="flex flex-col space-y-2">
-              <Link to="/" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">Home</Link>
-              <Link to="/about" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">About</Link>
-              <Link to="/courses" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">Courses</Link>
-              <Link to="/quiz" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">Quiz</Link>
-              <Link to="/contact" className="block px-3 py-3 text-base font-medium text-white hover:bg-gray-800 rounded-lg">Contact</Link>
+              <Link to="/" className={getMobileLinkClass('/')}>Home</Link>
+              <Link to="/about" className={getMobileLinkClass('/about')}>About</Link>
+              <Link to="/courses" className={getMobileLinkClass('/courses')}>Courses</Link>
+              <Link to="/quiz" className={getMobileLinkClass('/quiz')}>Quiz</Link>
+              <Link to="/contact" className={getMobileLinkClass('/contact')}>Contact</Link>
             </div>
             <div className="pt-4 border-t border-gray-800 flex flex-col space-y-3">
               {isLoggedIn ? (

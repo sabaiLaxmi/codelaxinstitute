@@ -33,19 +33,19 @@ const Footer = () => {
           <div>
             <h3 className="font-mono text-xs font-semibold text-gray-400 tracking-widest uppercase mb-4">Programs</h3>
             <ul className="space-y-3">
-              <li><Link to="/courses/frontend" className="text-sm text-gray-400 hover:text-white transition-colors">Full-Stack Development</Link></li>
-              <li><Link to="/courses/data" className="text-sm text-gray-400 hover:text-white transition-colors">Data Science</Link></li>
-              <li><Link to="/courses/uiux" className="text-sm text-gray-400 hover:text-white transition-colors">UI/UX Design</Link></li>
-              <li><Link to="/courses/cyber" className="text-sm text-gray-400 hover:text-white transition-colors">Cybersecurity</Link></li>
+              <li><Link to="/courses/frontend" className="inline-block text-sm text-gray-400 hover:text-white active:scale-95 active:text-orange transition-all">Full-Stack Development</Link></li>
+              <li><Link to="/courses/data" className="inline-block text-sm text-gray-400 hover:text-white active:scale-95 active:text-orange transition-all">Data Science</Link></li>
+              <li><Link to="/courses/uiux" className="inline-block text-sm text-gray-400 hover:text-white active:scale-95 active:text-orange transition-all">UI/UX Design</Link></li>
+              <li><Link to="/courses/cyber" className="inline-block text-sm text-gray-400 hover:text-white active:scale-95 active:text-orange transition-all">Cybersecurity</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="font-mono text-xs font-semibold text-gray-400 tracking-widest uppercase mb-4">Company</h3>
             <ul className="space-y-3">
-              <li><Link to="/about" className="text-sm text-gray-400 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/careers" className="text-sm text-gray-400 hover:text-white transition-colors">Careers</Link></li>
-              <li><Link to="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/about" className="inline-block text-sm text-gray-400 hover:text-white active:scale-95 active:text-orange transition-all">About Us</Link></li>
+              <li><Link to="/careers" className="inline-block text-sm text-gray-400 hover:text-white active:scale-95 active:text-orange transition-all">Careers</Link></li>
+              <li><Link to="/contact" className="inline-block text-sm text-gray-400 hover:text-white active:scale-95 active:text-orange transition-all">Contact</Link></li>
             </ul>
           </div>
 
@@ -79,8 +79,8 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} CodePath Institute. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="text-sm text-gray-500 hover:text-gray-300 transition-colors">Terms of Service</Link>
+            <Link to="/privacy" className="inline-block text-sm text-gray-500 hover:text-gray-300 active:scale-95 active:text-orange transition-all">Privacy Policy</Link>
+            <Link to="/terms" className="inline-block text-sm text-gray-500 hover:text-gray-300 active:scale-95 active:text-orange transition-all">Terms of Service</Link>
           </div>
         </div>
       </div>
