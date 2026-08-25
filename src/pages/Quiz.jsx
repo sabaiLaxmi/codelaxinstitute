@@ -120,7 +120,7 @@ const Quiz = () => {
       <div 
         ref={containerRef}
         onMouseMove={handleMouseMove}
-        className="bg-bg min-h-screen pt-24 pb-20 px-4 flex items-center justify-center relative overflow-hidden"
+        className="bg-bg min-h-screen pt-24 pb-20 px-4 flex flex-col md:flex-row items-center justify-center relative overflow-hidden"
       >
         {/* Animated Background Gradients */}
         <div className="absolute inset-0 z-0 opacity-30 dark:opacity-10 pointer-events-none">
@@ -128,12 +128,19 @@ const Quiz = () => {
           <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-orange rounded-full mix-blend-multiply filter blur-[100px] animate-pulse" style={{ animationDelay: '2s' }}></div>
         </div>
 
+        <div className="md:hidden z-20 flex flex-col items-center justify-center pointer-events-none mb-4 mt-8 relative">
+          <h1 className="font-display text-4xl font-bold text-navy tracking-tight text-center drop-shadow-lg">
+            Select <span className="text-orange">Topic</span>
+          </h1>
+          <p className="text-ink-soft text-sm font-medium mt-2">Choose a category to begin</p>
+        </div>
+
         <motion.div 
           style={{ x: parallaxX, y: parallaxY }}
-          className="relative z-10 w-full max-w-4xl aspect-square max-h-[80vh] flex items-center justify-center"
+          className="relative z-10 w-full max-w-4xl aspect-square max-h-[70vh] md:max-h-[80vh] flex items-center justify-center"
         >
-          {/* Center Hub */}
-          <div className="absolute z-20 flex flex-col items-center justify-center pointer-events-none">
+          {/* Center Hub (Desktop only) */}
+          <div className="hidden md:flex absolute z-20 flex-col items-center justify-center pointer-events-none">
             <h1 className="font-display text-4xl md:text-6xl font-bold text-navy tracking-tight text-center mb-2 drop-shadow-lg">
               Select <span className="text-orange">Topic</span>
             </h1>
