@@ -5,6 +5,7 @@ import { quizQuestions } from '../data/quizQuestions';
 
 const categories = [
   { id: 'HTML', title: 'HTML', icon: '</>', color: 'text-orange', border: 'border-orange', bg: 'bg-orange/10' },
+  { id: 'CSS', title: 'CSS', icon: '{#}', color: 'text-blue-500', border: 'border-blue-500', bg: 'bg-blue-500/10' },
   { id: 'JavaScript', title: 'JavaScript', icon: '{JS}', color: 'text-yellow-500', border: 'border-yellow-500', bg: 'bg-yellow-500/10' },
   { id: 'ReactJS', title: 'ReactJS', icon: '⚛', color: 'text-cyan-400', border: 'border-cyan-400', bg: 'bg-cyan-400/10' },
   { id: 'Theory', title: 'Theory Q&A', icon: '?', color: 'text-indigo', border: 'border-indigo', bg: 'bg-indigo/10' },
@@ -144,7 +145,7 @@ const Quiz = () => {
 
         <motion.div 
           style={{ x: parallaxX, y: parallaxY }}
-          className="relative z-10 w-full max-w-4xl aspect-square max-h-[70vh] md:max-h-[80vh] flex items-center justify-center"
+          className="relative z-10 w-full max-w-4xl aspect-square max-h-[50vh] sm:max-h-[60vh] md:max-h-[80vh] flex items-center justify-center scale-75 sm:scale-90 md:scale-100 mt-10 md:mt-0"
         >
           {/* Center Hub (Desktop only) */}
           <div className="hidden md:flex absolute z-20 flex-col items-center justify-center pointer-events-none">
@@ -163,7 +164,7 @@ const Quiz = () => {
           >
             {categories.map((cat, index) => {
               const angle = (index / categories.length) * Math.PI * 2;
-              const radius = windowWidth < 768 ? 26 : 35; 
+              const radius = windowWidth < 768 ? 32 : 36; 
               
               return (
                 <div 

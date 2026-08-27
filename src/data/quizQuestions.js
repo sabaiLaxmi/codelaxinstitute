@@ -1,4 +1,166 @@
 export const quizQuestions = [
+  // CSS (20 questions)
+  {
+    id: 101,
+    category: 'CSS',
+    question: 'What does CSS stand for?',
+    options: ['Computer Style Sheets', 'Creative Style Sheets', 'Cascading Style Sheets', 'Colorful Style Sheets'],
+    answer: 2,
+    explanation: 'CSS stands for Cascading Style Sheets, used for describing the presentation of a document.'
+  },
+  {
+    id: 102,
+    category: 'CSS',
+    question: 'Which HTML tag is used to define an internal style sheet?',
+    options: ['<script>', '<style>', '<css>', '<link>'],
+    answer: 1,
+    explanation: 'The <style> tag is used to define internal CSS within the <head> section.'
+  },
+  {
+    id: 103,
+    category: 'CSS',
+    question: 'Which HTML attribute is used to define inline styles?',
+    options: ['font', 'class', 'styles', 'style'],
+    answer: 3,
+    explanation: 'The style attribute is used to apply inline CSS styles to an HTML element.'
+  },
+  {
+    id: 104,
+    category: 'CSS',
+    question: 'Which is the correct CSS syntax?',
+    options: ['body {color: black;}', '{body;color:black;}', '{body:color=black;}', 'body:color=black;'],
+    answer: 0,
+    explanation: 'CSS syntax consists of a selector (body) followed by a declaration block ({color: black;}).'
+  },
+  {
+    id: 105,
+    category: 'CSS',
+    question: 'How do you insert a comment in a CSS file?',
+    options: ['// this is a comment', '/* this is a comment */', '// this is a comment //', '\' this is a comment'],
+    answer: 1,
+    explanation: 'Comments in CSS are written inside /* and */.'
+  },
+  {
+    id: 106,
+    category: 'CSS',
+    question: 'Which property is used to change the background color?',
+    options: ['bgcolor', 'color', 'background-color', 'bg-color'],
+    answer: 2,
+    explanation: 'The background-color property sets the background color of an element.'
+  },
+  {
+    id: 107,
+    category: 'CSS',
+    question: 'How do you add a background color for all <h1> elements?',
+    options: ['h1.all {background-color:#FFFFFF;}', 'h1 {background-color:#FFFFFF;}', 'all.h1 {background-color:#FFFFFF;}', 'h1 {bgcolor:#FFFFFF;}'],
+    answer: 1,
+    explanation: 'You select the h1 tag directly and apply the background-color property.'
+  },
+  {
+    id: 108,
+    category: 'CSS',
+    question: 'Which CSS property is used to change the text color of an element?',
+    options: ['fgcolor', 'text-color', 'color', 'font-color'],
+    answer: 2,
+    explanation: 'The color property changes the text color of an element.'
+  },
+  {
+    id: 109,
+    category: 'CSS',
+    question: 'Which CSS property controls the text size?',
+    options: ['text-size', 'font-size', 'text-style', 'font-style'],
+    answer: 1,
+    explanation: 'The font-size property is used to set the size of the text.'
+  },
+  {
+    id: 110,
+    category: 'CSS',
+    question: 'What is the correct CSS syntax for making all the <p> elements bold?',
+    options: ['p {text-size:bold;}', 'p {font-weight:bold;}', '<p style="font-size:bold;">', 'p {font:bold;}'],
+    answer: 1,
+    explanation: 'The font-weight property is used to specify the weight (boldness) of the font.'
+  },
+  {
+    id: 111,
+    category: 'CSS',
+    question: 'How do you display hyperlinks without an underline?',
+    options: ['a {decoration:no-underline;}', 'a {text-decoration:none;}', 'a {underline:none;}', 'a {text-decoration:no-underline;}'],
+    answer: 1,
+    explanation: 'The text-decoration property set to none removes the underline from links.'
+  },
+  {
+    id: 112,
+    category: 'CSS',
+    question: 'How do you make each word in a text start with a capital letter?',
+    options: ['text-transform:capitalize', 'text-style:capitalize', 'transform:capitalize', 'text-transform:uppercase'],
+    answer: 0,
+    explanation: 'text-transform: capitalize; converts the first character of each word to uppercase.'
+  },
+  {
+    id: 113,
+    category: 'CSS',
+    question: 'Which property is used to change the font of an element?',
+    options: ['font-weight', 'font-family', 'font-style', 'font-size'],
+    answer: 1,
+    explanation: 'The font-family property specifies the font for an element.'
+  },
+  {
+    id: 114,
+    category: 'CSS',
+    question: 'How do you make the text bold?',
+    options: ['font-weight:bold;', 'style:bold;', 'font:bold;', 'text-align:bold;'],
+    answer: 0,
+    explanation: 'The font-weight property set to bold makes the text bold.'
+  },
+  {
+    id: 115,
+    category: 'CSS',
+    question: 'Which property is used to change the left margin of an element?',
+    options: ['margin-left', 'padding-left', 'indent', 'margin'],
+    answer: 0,
+    explanation: 'The margin-left property specifies the left margin of an element.'
+  },
+  {
+    id: 116,
+    category: 'CSS',
+    question: 'When using the padding property; are you allowed to use negative values?',
+    options: ['Yes', 'No', 'Only on block elements', 'Only on inline elements'],
+    answer: 1,
+    explanation: 'Negative values are not allowed for the padding property, but they are allowed for margin.'
+  },
+  {
+    id: 117,
+    category: 'CSS',
+    question: 'How do you select an element with id "demo"?',
+    options: ['.demo', '#demo', 'demo', '*demo'],
+    answer: 1,
+    explanation: 'The hash symbol (#) is used to select an element by its ID.'
+  },
+  {
+    id: 118,
+    category: 'CSS',
+    question: 'How do you select elements with class name "test"?',
+    options: ['#test', '*test', 'test', '.test'],
+    answer: 3,
+    explanation: 'The period (.) is used to select elements by their class name.'
+  },
+  {
+    id: 119,
+    category: 'CSS',
+    question: 'How do you select all p elements inside a div element?',
+    options: ['div p', 'div + p', 'div.p', 'div > p'],
+    answer: 0,
+    explanation: 'A space between selectors (descendant selector) matches all elements that are descendants of a specified element.'
+  },
+  {
+    id: 120,
+    category: 'CSS',
+    question: 'What is the default value of the position property?',
+    options: ['relative', 'fixed', 'absolute', 'static'],
+    answer: 3,
+    explanation: 'Elements render in order, as they appear in the document flow. The default position is static.'
+  },
+
   // HTML (20 questions)
   {
     id: 1,
