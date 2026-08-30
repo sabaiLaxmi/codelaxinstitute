@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { quizQuestions } from '../data/quizQuestions';
+import OrbitImages from '../components/OrbitImages';
 
 const categories = [
   { id: 'HTML', title: 'HTML', icon: '</>', color: 'text-orange', border: 'border-orange', bg: 'bg-orange/10' },
@@ -136,71 +137,43 @@ const Quiz = () => {
           <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-orange rounded-full mix-blend-multiply filter blur-[100px] animate-pulse" style={{ animationDelay: '2s' }}></div>
         </div>
 
-        <div className="md:hidden z-20 flex flex-col items-center justify-center pointer-events-none mb-4 mt-8 relative">
-          <h1 className="font-display text-4xl font-bold text-navy tracking-tight text-center drop-shadow-lg">
-            Select <span className="text-orange">Topic</span>
+        <div className="z-20 flex flex-col items-center md:items-start justify-center w-full md:w-1/3 md:pl-12 pointer-events-none text-center md:text-left mt-8 md:mt-0 mb-8 md:mb-0">
+          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-navy tracking-tight drop-shadow-lg leading-tight">
+            Select <br className="hidden md:block" />
+            <span className="text-orange">Topic</span>
           </h1>
-          <p className="text-ink-soft text-sm font-medium mt-2">Choose a category to begin</p>
+          <p className="text-ink-soft text-lg md:text-xl font-medium mt-4">Choose a category to begin</p>
         </div>
 
         <motion.div 
           style={{ x: parallaxX, y: parallaxY }}
-          className="relative z-10 w-full max-w-4xl aspect-square max-h-[50vh] sm:max-h-[60vh] md:max-h-[80vh] flex items-center justify-center scale-75 sm:scale-90 md:scale-100 mt-10 md:mt-0"
+          className="relative z-10 w-full md:w-2/3 max-w-4xl flex items-center justify-center aspect-square max-h-[60vh] md:max-h-[80vh]"
         >
-          {/* Center Hub (Desktop only) */}
-          <div className="hidden md:flex absolute z-20 flex-col items-center justify-center pointer-events-none">
-            <h1 className="font-display text-4xl md:text-6xl font-bold text-navy tracking-tight text-center mb-2 drop-shadow-lg">
-              Select <span className="text-orange">Topic</span>
-            </h1>
-            <p className="text-ink-soft text-lg font-medium">Choose a category to begin</p>
-          </div>
-
-          {/* Orbiting Cards Container */}
-          <motion.div 
-            animate={{ rotate: 360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            style={{ animationPlayState: isHovering ? 'paused' : 'running' }}
-            className="absolute inset-0 flex items-center justify-center w-full h-full"
-          >
-            {categories.map((cat, index) => {
-              const angle = (index / categories.length) * Math.PI * 2;
-              const radius = windowWidth < 768 ? 32 : 36; 
-              
-              return (
-                <div 
-                  key={cat.id}
-                  className="absolute"
-                  style={{
-                    left: `calc(50% + ${Math.cos(angle) * radius}%)`,
-                    top: `calc(50% + ${Math.sin(angle) * radius}%)`,
-                    transform: 'translate(-50%, -50%)',
-                  }}
-                >
-                  <motion.div
-                    animate={{ rotate: -360 }}
-                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                    style={{ animationPlayState: isHovering ? 'paused' : 'running' }}
-                  >
-                    <motion.div
-                      onMouseEnter={() => setIsHovering(true)}
-                      onMouseLeave={() => setIsHovering(false)}
-                      onClick={() => setSelectedCategory(cat.id)}
-                      whileHover={{ scale: 1.15, zIndex: 50 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`w-28 h-28 sm:w-32 sm:h-32 md:w-48 md:h-48 rounded-[20px] md:rounded-[24px] bg-white shadow-xl cursor-pointer border-2 ${cat.border} flex flex-col items-center justify-center gap-2 md:gap-4 transition-shadow hover:shadow-2xl hover:shadow-${cat.border.split('-')[1]}/30 group`}
-                    >
-                      <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full ${cat.bg} flex items-center justify-center ${cat.color} font-mono text-lg md:text-2xl font-bold transition-transform group-hover:scale-110`}>
-                        {cat.icon}
-                      </div>
-                      <span className="font-display font-bold text-navy text-xs sm:text-sm md:text-lg text-center px-2">
-                        {cat.title}
-                      </span>
-                    </motion.div>
-                  </motion.div>
+          <OrbitImages
+            items={categories.map((cat) => (
+              <div 
+                key={cat.id}
+                onClick={() => setSelectedCategory(cat.id)}
+                className={`w-full h-full rounded-[20px] bg-white shadow-xl cursor-pointer border-2 ${cat.border} flex flex-col items-center justify-center gap-2 transition-shadow hover:shadow-2xl group pointer-events-auto`}
+              >
+                <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full ${cat.bg} flex items-center justify-center ${cat.color} font-mono text-xl md:text-2xl font-bold transition-transform group-hover:scale-110`}>
+                  {cat.icon}
                 </div>
-              );
-            })}
-          </motion.div>
+                <span className="font-display font-bold text-navy text-sm md:text-lg text-center px-2">
+                  {cat.title}
+                </span>
+              </div>
+            ))}
+            shape="ellipse"
+            radiusX={windowWidth < 768 ? 280 : 380} 
+            radiusY={windowWidth < 768 ? 70 : 100}
+            rotation={-8}
+            baseWidth={1100}
+            duration={30}
+            itemSize={windowWidth < 768 ? 100 : 120}
+            responsive={true}
+            showPath={true}
+          />
         </motion.div>
       </div>
     );
